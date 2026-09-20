@@ -16,13 +16,28 @@ const transactions = [
   { merchant: 'Uber', detail: 'Sep 17, 6:23 PM', category: 'Transportation', amount: '-₹482', tone: 'black', badge: 'U' },
 ]
 
+function LandingPage({ onEnter }: { onEnter: () => void }) {
+  return <div className="landing-page">
+    <header className="landing-nav"><div className="brand landing-brand"><span className="brand-mark">F</span><span>FinPilot</span></div><div className="landing-links"><a href="#features">Features</a><a href="#how-it-works">How it works</a><a href="#security">Security</a></div><button className="landing-login" onClick={onEnter}>Log in <ArrowUpRight size={15} /></button></header>
+    <main>
+      <section className="landing-hero"><div className="hero-copy"><p className="hero-kicker"><span /> PERSONAL FINANCE, MADE CLEAR</p><h1>Understand your money.<br /><em>Plan your next move.</em></h1><p className="hero-subcopy">FinPilot turns your financial data into clear insights, smarter spending plans, and actionable goals. All in one calm, focused place.</p><div className="hero-actions"><button className="hero-primary" onClick={onEnter}>Get started <ArrowUpRight size={17} /></button><a className="hero-secondary" href="#features">Explore FinPilot <span>↓</span></a></div><div className="hero-proof"><div className="proof-avatars"><span>AR</span><span>MK</span><span>JP</span></div><span>Built for everyday decisions<br /><strong>Private by design</strong></span></div></div><div className="hero-visual"><div className="visual-glow" /><div className="mini-dashboard"><div className="mini-top"><span className="mini-logo">F</span><span>Overview</span><span className="mini-dots">•••</span></div><div className="mini-balance"><span>Total balance</span><strong>₹1,24,850</strong><small>↗ 12.8% this month</small></div><div className="mini-bars">{[38, 58, 45, 68, 52, 79, 63, 92, 70, 84].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}</div><div className="mini-bottom"><div><span>Monthly savings</span><strong>₹32,600</strong></div><div className="mini-ring"><span>38%</span></div></div></div><div className="float-note note-one"><Sparkles size={15} /><span><strong>FinPilot insight</strong><br />You’re on track this month.</span></div><div className="float-note note-two"><Target size={16} /><span><strong>Emergency fund</strong><br />56% complete</span></div></div></section>
+      <section className="feature-strip" id="features"><div><p className="eyebrow">ONE CLEAR VIEW</p><h2>Everything you need to feel<br />in control of your money.</h2></div><div className="feature-list"><span><Sparkles size={17} /> Smart insights</span><span><Target size={17} /> Goal simulator</span><span><CalendarDays size={17} /> Paycheck planner</span><span><Bot size={17} /> AI assistant</span></div></section>
+      <section className="how-section" id="how-it-works"><p className="eyebrow">HOW IT WORKS</p><h2>From financial noise<br /><em>to a next move.</em></h2><div className="steps"><article><span>01</span><h3>Bring it together.</h3><p>Upload statements, bills, or expense records. FinPilot keeps the details organized.</p></article><article><span>02</span><h3>See the pattern.</h3><p>Understand spending, recurring commitments, and the moments that shape your cash flow.</p></article><article><span>03</span><h3>Make a plan.</h3><p>Simulate tradeoffs, prepare for payday, and turn a goal into a practical monthly habit.</p></article></div></section>
+      <section className="landing-security" id="security"><div><p className="eyebrow">PRIVATE BY DESIGN</p><h2>Your money stays yours.</h2><p>FinPilot is a financial awareness tool, not an investment advisor. Your data is handled with care, clarity, and purpose.</p></div><button className="security-chip"><span /> Secure workspace <ArrowUpRight size={15} /></button></section>
+    </main><footer className="landing-footer"><span>© 2026 FinPilot</span><span>Clearer money. Better next moves.</span></footer>
+  </div>
+}
+
 function App() {
+  const [showDashboard, setShowDashboard] = useState(false)
   const [activeNav, setActiveNav] = useState('Overview')
   const [range, setRange] = useState('30 days')
   const [showMobileNav, setShowMobileNav] = useState(false)
   const [foodCut, setFoodCut] = useState(30)
   const simulatedSavings = 32600 + foodCut * 42
   const monthsToGoal = Math.max(3.8, 6.7 - foodCut / 25)
+
+  if (!showDashboard) return <LandingPage onEnter={() => setShowDashboard(true)} />
 
   return (
     <div className="app-shell">
